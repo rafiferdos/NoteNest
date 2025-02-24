@@ -2,8 +2,8 @@
 import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
-import MenuIcon from '../icons/MenuIcon'
 import MountainIcon from '../icons/MountainIcon'
+import MenuIcon from '../icons/MenuIcon'
 
 export default function Navbar() {
   return (
