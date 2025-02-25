@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import MountainIcon from '../icons/MountainIcon'
 import MenuIcon from '../icons/MenuIcon'
+import { GlowEffect } from '../ui/glow-effect'
+import { ModeToggle } from '../icons/ModeToggle'
 
 export default function Navbar() {
   return (
@@ -18,7 +20,7 @@ export default function Navbar() {
         <SheetContent side='left'>
           <Link to='/' className='mr-6 hidden lg:flex'>
             <MountainIcon className='h-6 w-6' />
-            <span className='sr-only'>Acme Inc</span>
+            <span className='sr-only'>NoteNest</span>
           </Link>
           {/* Mobile Menu Links */}
           <div className='grid gap-2 py-6'>
@@ -34,6 +36,9 @@ export default function Navbar() {
             >
               About Us
             </Link>
+            <div className='relative'>
+              <ModeToggle />
+            </div>
           </div>
         </SheetContent>
       </Sheet>
@@ -41,9 +46,9 @@ export default function Navbar() {
       {/* Desktop Links */}
       <Link to='/' className='mr-6 hidden lg:flex'>
         <MountainIcon className='h-6 w-6' />
-        <span className='sr-only'>Acme Inc</span>
+        <span className='sr-only'>NoteNest</span>
       </Link>
-      <nav className='ml-auto hidden lg:flex gap-6'>
+      <nav className='ml-auto hidden lg:flex gap-6 items-center'>
         <Link to='/' className='...'>
           Home
         </Link>
@@ -53,9 +58,18 @@ export default function Navbar() {
         <Link to='/about' className='...'>
           About
         </Link>
-        <Link to='/cart' className='...'>
-          Cart
-        </Link>
+        <div className='relative'>
+          <GlowEffect
+            colors={['#FF5733', '#33FF57', '#3357FF', '#F1C40F']}
+            mode='colorShift'
+            blur='soft'
+            duration={3}
+            scale={0.9}
+          />
+          <div className='relative'>
+            <ModeToggle />
+          </div>
+        </div>
       </nav>
     </header>
   )
