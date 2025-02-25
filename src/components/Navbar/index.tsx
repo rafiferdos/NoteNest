@@ -1,4 +1,3 @@
-// src/components/Navbar/index.tsx
 import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
@@ -35,14 +34,6 @@ export default function Navbar() {
             >
               About Us
             </Link>
-            {/* <Link
-              href='/cart'
-              className='flex w-full items-center py-2 text-lg font-semibold'
-              prefetch={false}
-            >
-              Cart ({cartItemQuantity})
-            </Link> */}
-            {/* Add more links */}
           </div>
         </SheetContent>
       </Sheet>
