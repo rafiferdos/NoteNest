@@ -82,8 +82,8 @@ export default function Navbar() {
             </Link>
           ))}
         </AnimatedBackground>
-        <Button variant='default' size='sm'>
-          Sign Up
+        <Button variant='default' size='sm' asChild>
+          <Link to={'/register'}>Sign Up</Link>
         </Button>
         <div className='relative'>
           <GlowEffect
