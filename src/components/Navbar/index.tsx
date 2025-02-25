@@ -62,11 +62,11 @@ export default function Navbar() {
       <nav className='ml-auto hidden lg:flex gap-6 items-center'>
         <AnimatedBackground
           defaultValue={Tabs[0].name}
-          className='rounded-lg bg-yellow-300 dark:bg-yellow-600'
+          className='border border-b-yellow-200 dark:border-b-yellow-600 border-t-0 border-l-0 border-r-0'
           transition={{
             type: 'spring',
             bounce: 0.2,
-            duration: 0.3,
+            duration: 1,
           }}
           enableHover
         >
@@ -82,6 +82,9 @@ export default function Navbar() {
             </Link>
           ))}
         </AnimatedBackground>
+        <Button variant='default' size='sm'>
+          Sign Up
+        </Button>
         <div className='relative'>
           <GlowEffect
             colors={['#FF5733', '#33FF57', '#3357FF', '#F1C40F']}
