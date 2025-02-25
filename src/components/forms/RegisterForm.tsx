@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -15,6 +14,7 @@ import { Input } from '@/components/ui/input'
 
 import toast from 'react-hot-toast'
 import { PasswordInput } from '@/components/ui/password-input'
+import { Link } from 'react-router-dom'
 
 const formSchema = z.object({
   name_2431871245: z.string().min(1),
@@ -30,11 +30,7 @@ export default function RegisterForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       console.log(values)
-      toast(
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      )
+      toast.success('Form submitted successfully!')
     } catch (error) {
       console.error('Form submission error', error)
       toast.error('Failed to submit the form. Please try again.')
@@ -56,7 +52,6 @@ export default function RegisterForm() {
               <FormControl>
                 <Input placeholder='Enter Full Name' type='text' {...field} />
               </FormControl>
-              <FormDescription>Full Name</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -71,7 +66,6 @@ export default function RegisterForm() {
               <FormControl>
                 <Input placeholder='Enter Your Email' type='email' {...field} />
               </FormControl>
-              <FormDescription>Email</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -86,13 +80,22 @@ export default function RegisterForm() {
               <FormControl>
                 <PasswordInput placeholder='Enter your password' {...field} />
               </FormControl>
-              <FormDescription>Password</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type='submit'>Submit</Button>
+        <div className='flex justify-center'>
+          <Link to='/login'>
+            <Button variant='link'>Already have an account? Sign In</Button>
+          </Link>
+        </div>
+
+        <div className='flex justify-center'>
+          <Button type='submit' size='lg'>
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
   )
