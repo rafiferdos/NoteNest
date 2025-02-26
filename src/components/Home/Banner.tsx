@@ -8,7 +8,7 @@ export default function Banner() {
     <div className='flex flex-col md:flex-row items-center justify-between lg:mt-16 mt-8 rounded-lg gap-6 md:gap-12 bg-gray-50 dark:bg-gray-950 p-6 md:p-12'>
       <div className='flex-1'>
         <h2 className='text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-50'>
-          Welcome to{' '}
+          Welcome to {' '}
           <TextLoop
             className='overflow-y-clip font-charm'
             transition={{
