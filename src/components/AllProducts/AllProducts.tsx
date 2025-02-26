@@ -9,12 +9,10 @@ import OneProduct from './OneProduct'
 import {
   Select,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
   SelectContent,
 } from '../ui/select'
-
 
 export type TProduct = {
   _id: string
@@ -74,11 +72,13 @@ const AllProductsC: React.FC = () => {
       </div>
 
       <div className='flex gap-4 my-4 w-full'>
-        <Select 
+        <Select
           onValueChange={(value) => {
             setParams((prevParams) => {
               const updatedParams = prevParams ? [...prevParams] : []
-              const filterParams = updatedParams.filter((param) => param.name !== 'category')
+              const filterParams = updatedParams.filter(
+                (param) => param.name !== 'category'
+              )
               filterParams.push({ name: 'category', value })
               return filterParams
             })
@@ -95,11 +95,13 @@ const AllProductsC: React.FC = () => {
             ))}
           </SelectContent>
         </Select>
-        <Select 
+        <Select
           onValueChange={(value) => {
             setParams((prevParams) => {
               const updatedParams = prevParams ? [...prevParams] : []
-              const filterParams = updatedParams.filter((param) => param.name !== 'inStock')
+              const filterParams = updatedParams.filter(
+                (param) => param.name !== 'inStock'
+              )
               filterParams.push({ name: 'inStock', value })
               return filterParams
             })
@@ -129,9 +131,6 @@ const AllProductsC: React.FC = () => {
         />
       </div>
 
-
-
-
       <div className='md:my-16 my-10'>
         {isLoading ? (
           <TextShimmer
@@ -142,11 +141,9 @@ const AllProductsC: React.FC = () => {
           </TextShimmer>
         ) : (
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-            {
-              products?.map((product: TProduct) => (
-                <OneProduct key={product._id} product={product} />
-              ))
-            }
+            {products?.map((product: TProduct) => (
+              <OneProduct key={product._id} product={product} />
+            ))}
           </div>
         )}
       </div>
