@@ -12,6 +12,7 @@ import {
 import { configureStore } from '@reduxjs/toolkit'
 import { baseApi } from './api/baseApi'
 import authReducer from './auth/authSlice'
+import cartReducer from './Features/productManagement/cart.api'
 
 const persistConfig = {
   key: 'auth',
