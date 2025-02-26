@@ -1,4 +1,5 @@
 import MainLayout from '@/layouts/MainLayout'
+import AllProducts from '@/pages/AllProducts'
 import Login from '@/pages/Auth/Login'
 import Register from '@/pages/Auth/Register'
 import ErrorPage from '@/pages/ErrorPage'
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/products',
+        element: <AllProducts />,
       },
     ],
   },
