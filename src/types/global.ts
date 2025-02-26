@@ -13,6 +13,7 @@ export interface TOrderProduct {
   name: string
   brand: string
   price: number
+  imageUrl: string
   category: ProductCategory
   description: string
   quantity: number
@@ -39,7 +40,8 @@ export type TResponseRedux<T> = TResponse<T> & BaseQueryApi
 
 export type TQueryParam = {
   name: string
-  value: boolean | React.Key
+  // value: boolean | React.Key
+  value: string | number | boolean | React.Key
 }
 
 export type TUserInfo = {

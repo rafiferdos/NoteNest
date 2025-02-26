@@ -10,13 +10,14 @@ const productApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Product'],
     }),
+    
     getAllProductData: builder.query({
       query: (args) => {
         const params = new URLSearchParams()
         if (args)
           args.forEach((item: any) => params.append(item.name, item.value))
         return {
-          url: `/products/`,
+          url: `/api/products/`,
           params: params,
         }
       },
