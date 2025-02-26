@@ -12,6 +12,9 @@ const FeaturedProducts = () => {
             by you.
           </h1>
         </div>
+        <div>
+          
+        </div>
       </div>
     </>
   )

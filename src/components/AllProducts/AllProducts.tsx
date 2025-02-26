@@ -29,7 +29,6 @@ export type TProduct = {
 const AllProductsC: React.FC = () => {
   const [params, setParams] = useState<TQueryParam[] | undefined>(undefined)
   const { data: response, isLoading } = useGetAllProductDataQuery(params)
-  console.log(response)
 
   const handleChangeFilter = (
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
