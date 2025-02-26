@@ -1,6 +1,4 @@
 import { useGetAllProductDataQuery } from '@/redux/Features/productManagement/productApi'
-import { TQueryParam } from '@/types/global'
-import { useState } from 'react'
 import { SkeletonCard } from '../Skeletons/SkeletonCard'
 import { TProduct } from '../AllProducts/AllProducts'
 import OneProduct from '../AllProducts/OneProduct'
