@@ -18,7 +18,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
 
   const location = useLocation()
 
-  if (!token) <Navigate to='/login' state={{ from: location }} replace />
+  if (!token) return <Navigate to='/login' state={{ from: location }} replace />
 
   if (requireAdmin && user?.role !== 'admin') {
     dispatch(logout())

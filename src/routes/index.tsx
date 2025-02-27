@@ -1,4 +1,8 @@
+import DashboardHome from '@/components/Dashboard/DashboardHome'
+import ManageProducts from '@/components/Dashboard/ManageProducts'
+import ManageUsers from '@/components/Dashboard/ManageUsers'
 import PrivateRoute from '@/components/PrivateRoute'
+import DashboardLayout from '@/layouts/DashboardLayout'
 import MainLayout from '@/layouts/MainLayout'
 import About from '@/pages/About'
 import AllProducts from '@/pages/AllProducts'
@@ -43,7 +47,34 @@ const router = createBrowserRouter([
       },
       {
         path: '/cart',
-        element: <PrivateRoute><Cart /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <DashboardHome />,
+      },
+      {
+        path: 'products',
+        element: <ManageProducts />,
+      },
+      {
+        path: 'users',
+        element: <ManageUsers />,
       },
     ],
   },
