@@ -3,6 +3,7 @@ import { SkeletonCard } from '../Skeletons/SkeletonCard'
 import { TProduct } from '../AllProducts/AllProducts'
 import OneProduct from '../AllProducts/OneProduct'
 import { Button } from '../ui/button'
+import { Link } from 'react-router-dom'
 
 const FeaturedProducts = () => {
   const { data: response, isLoading } = useGetAllProductDataQuery('')
@@ -40,7 +41,9 @@ const FeaturedProducts = () => {
           )}
         </div>
         <div className='flex justify-center'>
-          <Button variant='default'>View All Products</Button>
+          <Button variant='default'>
+            <Link to='/products'>View All Products</Link>
+          </Button>
         </div>
       </div>
     </>
