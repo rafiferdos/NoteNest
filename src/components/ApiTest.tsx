@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react'
 
 const ApiTest = () => {
@@ -15,7 +16,7 @@ const ApiTest = () => {
           ...prev,
           base: { status: baseResponse.status, data: baseData },
         }))
-      } catch (error) {
+      } catch (error: string | any) {
         setResults((prev) => ({ ...prev, base: { error: error.message } }))
       }
 
@@ -29,7 +30,7 @@ const ApiTest = () => {
           ...prev,
           products: { status: productsResponse.status, data: productsData },
         }))
-      } catch (error) {
+      } catch (error: string | any) {
         setResults((prev) => ({ ...prev, products: { error: error.message } }))
       }
 
@@ -43,7 +44,7 @@ const ApiTest = () => {
           ...prev,
           query: { status: queryResponse.status, data: queryData },
         }))
-      } catch (error) {
+      } catch (error: string | any) {
         setResults((prev) => ({ ...prev, query: { error: error.message } }))
       }
     }
