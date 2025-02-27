@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from '../ui/tooltip'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout, useCurrentToken } from '@/redux/auth/authSlice'
+import { logout, useCurrentToken, useCurrentUser } from '@/redux/auth/authSlice'
 import toast from 'react-hot-toast'
 
 export default function Navbar() {
@@ -22,6 +22,10 @@ export default function Navbar() {
   const dispatch = useDispatch()
   const token = useSelector(useCurrentToken)
   const navigate = useNavigate()
+
+  const user = useSelector(useCurrentUser)
+
+  const isAdmin = user?.role === 'admin'
 
   const Tabs = [
     { name: 'Home', href: '/' },
@@ -125,20 +129,23 @@ export default function Navbar() {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            <TooltipProvider delayDuration={0}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant='ghost' size='sm' asChild>
-                    <Link to={'/dashboard'}>
-                      <UserRound />
-                    </Link>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Cart</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            {/* Display dashboard button only if user is admin */}
+            {isAdmin && (
+              <TooltipProvider delayDuration={0}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant='ghost' size='sm' asChild>
+                      <Link to={'/dashboard'}>
+                        <UserRound />
+                      </Link>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Admin Dashboard</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
           </div>
           {token ? (
             <Button variant='destructive' size='sm' onClick={handleLogout}>
