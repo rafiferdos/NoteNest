@@ -26,27 +26,27 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/register',
+        path: 'register',
         element: <Register />,
       },
       {
-        path: '/login',
+        path: 'login',
         element: <Login />,
       },
       {
-        path: '/products',
+        path: 'products',
         element: <AllProducts />,
       },
       {
-        path: '/about',
+        path: 'about',
         element: <About />,
       },
       {
-        path: '/api/products/:productId',
+        path: 'api/products/:productId',
         element: <ProductDetails />,
       },
       {
-        path: '/cart',
+        path: 'cart',
         element: (
           <PrivateRoute>
             <Cart />
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: (
-      <PrivateRoute>
+      <PrivateRoute requireAdmin={true}>
         <DashboardLayout />
       </PrivateRoute>
     ),

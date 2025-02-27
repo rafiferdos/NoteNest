@@ -30,12 +30,12 @@ export default function DashboardSidebar() {
   }
 
   return (
-    <SidebarProvider defaultOpen>
+    <>
       <Sidebar className='border-r'>
         <SidebarHeader>
           <div className='flex items-center justify-between px-4 py-2'>
             <Link to='/' className='flex items-center gap-2 font-medium'>
-              <h1 className='text-xl font-bold'>NoteNest</h1>
+              <h1 className='text-xl font-extrabold font-charm'>NoteNest</h1>
             </Link>
             <ModeToggle />
           </div>
@@ -107,6 +107,6 @@ export default function DashboardSidebar() {
           </div>
         </SidebarFooter>
       </Sidebar>
-    </SidebarProvider>
+    </>
   )
 }

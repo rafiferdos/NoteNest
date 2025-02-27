@@ -17,6 +17,7 @@ import cartReducer from './Features/productManagement/cart.api'
 const persistConfig = {
   key: 'auth',
   storage,
+  // whitelist: ['user', 'token'],
 }
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer)

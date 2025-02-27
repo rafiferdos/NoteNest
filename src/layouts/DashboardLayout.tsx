@@ -5,6 +5,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 import DashboardSidebar from '@/components/Dashboard/DashboardSidebar'
+import { SidebarProvider } from '@/components/ui/sidebar'
 
 export default function DashboardLayout() {
   const user = useSelector(useCurrentUser)
@@ -22,16 +23,18 @@ export default function DashboardLayout() {
   }
 
   return (
-    <div className='flex h-screen'>
-      {/* Sidebar */}
-      <DashboardSidebar />
+    <SidebarProvider defaultOpen>
+      <div className='flex h-screen'>
+        {/* Sidebar */}
+        <DashboardSidebar />
 
-      {/* Main content */}
-      <div className='flex-1 overflow-auto'>
-        <div className='container mx-auto px-4 py-6'>
-          <Outlet />
+        {/* Main content */}
+        <div className='flex-1 overflow-auto'>
+          <div className='container mx-auto px-4 py-6'>
+            <Outlet />
+          </div>
         </div>
       </div>
-    </div>
+    </SidebarProvider>
   )
 }
