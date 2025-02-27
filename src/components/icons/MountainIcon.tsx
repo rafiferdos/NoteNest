@@ -1,6 +1,5 @@
 import { SVGProps } from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function MountainIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -10,10 +9,11 @@ export default function MountainIcon(props: SVGProps<SVGSVGElement>) {
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
       className='lucide lucide-notebook-text'
+      {...props}
     >
       <path d='M2 6h4' />
       <path d='M2 10h4' />
