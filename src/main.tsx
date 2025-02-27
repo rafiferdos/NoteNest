@@ -8,15 +8,19 @@ import { ThemeProvider } from './components/providers/theme-provider.tsx'
 import { Provider } from 'react-redux'
 import { persistor, store } from './redux/store.ts'
 import { PersistGate } from 'redux-persist/integration/react'
+import { ScrollContainer } from 'react-nice-scroll'
+import 'react-nice-scroll/dist/styles.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <ScrollContainer>
         <ThemeProvider>
           <RouterProvider router={router} />
           <Toaster />
         </ThemeProvider>
+        </ScrollContainer>
       </PersistGate>
     </Provider>
   </StrictMode>

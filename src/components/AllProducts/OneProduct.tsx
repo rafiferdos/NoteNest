@@ -39,7 +39,8 @@ const OneProduct = ({ product }: { product: TProduct }) => {
         </div>
       </CardContent>
       <CardFooter className='flex justify-between items-center mt-auto'>
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center text-lg'>
+          ৳
           <TextScramble className='text-lg font-semibold'>
             {product.price.toString()}
           </TextScramble>

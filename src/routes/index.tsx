@@ -1,4 +1,5 @@
 import MainLayout from '@/layouts/MainLayout'
+import About from '@/pages/About'
 import AllProducts from '@/pages/AllProducts'
 import Login from '@/pages/Auth/Login'
 import Register from '@/pages/Auth/Register'
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <AllProducts />,
+      },
+      {
+        path: '/about',
+        element: <About />,
       },
     ],
   },
