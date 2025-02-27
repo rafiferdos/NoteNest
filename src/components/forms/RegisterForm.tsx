@@ -11,29 +11,51 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-
 import toast from 'react-hot-toast'
 import { PasswordInput } from '@/components/ui/password-input'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useRegisterMutation } from '@/redux/auth/authApi'
 
 const formSchema = z.object({
-  name_2431871245: z.string().min(1),
-  name_4291970954: z.string(),
-  name_6381876849: z.string(),
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Please enter a valid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
 })
 
 export default function RegisterForm() {
+  const navigate = useNavigate()
+  const [register, { isLoading }] = useRegisterMutation()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log(values)
-      toast.success('Form submitted successfully!')
-    } catch (error) {
-      console.error('Form submission error', error)
-      toast.error('Failed to submit the form. Please try again.')
+      console.log('Registration attempt with:', values)
+
+      const result = await register(values).unwrap()
+
+      toast.success(result.message || 'Registration successful!')
+
+      // Redirect to login page after successful registration
+      navigate('/login')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error('Registration error:', error)
+
+      if (error.status === 409) {
+        toast.error('Email already exists. Please use a different email.')
+      } else if (error.data?.message) {
+        toast.error(error.data.message)
+      } else {
+        toast.error('Registration failed. Please try again.')
+      }
     }
   }
 
@@ -45,7 +67,7 @@ export default function RegisterForm() {
       >
         <FormField
           control={form.control}
-          name='name_2431871245'
+          name='name'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Full Name</FormLabel>
@@ -59,7 +81,7 @@ export default function RegisterForm() {
 
         <FormField
           control={form.control}
-          name='name_4291970954'
+          name='email'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
@@ -73,7 +95,7 @@ export default function RegisterForm() {
 
         <FormField
           control={form.control}
-          name='name_6381876849'
+          name='password'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
@@ -92,8 +114,8 @@ export default function RegisterForm() {
         </div>
 
         <div className='flex justify-center'>
-          <Button type='submit' size='lg'>
-            Submit
+          <Button type='submit' size='lg' disabled={isLoading}>
+            {isLoading ? 'Registering...' : 'Submit'}
           </Button>
         </div>
       </form>
