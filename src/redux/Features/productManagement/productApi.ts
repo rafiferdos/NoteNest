@@ -4,18 +4,20 @@ const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     addProduct: builder.mutation({
       query: (productInfo) => ({
-        url: '/products',
+        url: '/api/products',
         method: 'POST',
         body: productInfo,
       }),
       invalidatesTags: ['Product'],
     }),
-    
+
     getAllProductData: builder.query({
       query: (args) => {
         const params = new URLSearchParams()
         if (args)
-          args.forEach((item: any) => params.append(item.name, item.value))
+          args.forEach((item: { name: string; value: string }) =>
+            params.append(item.name, item.value)
+          )
         return {
           url: `/api/products/`,
           params: params,
@@ -27,14 +29,14 @@ const productApi = baseApi.injectEndpoints({
     getOneProductData: builder.query({
       query: (productId) => {
         return {
-          url: `/products/${productId}`,
+          url: `/api/products/${productId}`,
         }
       },
     }),
 
     deleteProduct: builder.mutation({
       query: (productId) => ({
-        url: `/products/${productId}`,
+        url: `/api/products/${productId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Product'],
@@ -42,7 +44,7 @@ const productApi = baseApi.injectEndpoints({
 
     updateProduct: builder.mutation({
       query: ({ productId, productInfo }) => ({
-        url: `/products/${productId}`,
+        url: `/api/products/${productId}`,
         method: 'PUT',
         body: productInfo,
       }),
