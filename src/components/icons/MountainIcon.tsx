@@ -1,5 +1,6 @@
 import { SVGProps } from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function MountainIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
