@@ -1,26 +1,40 @@
 import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import MountainIcon from '../icons/MountainIcon'
 import MenuIcon from '../icons/MenuIcon'
 import { GlowEffect } from '../ui/glow-effect'
 import { ModeToggle } from '../icons/ModeToggle'
 import { AnimatedBackground } from '../ui/animated-background'
-import { ShoppingCart, UserRound } from 'lucide-react'
+import { LogOut, ShoppingCart, UserRound } from 'lucide-react'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '../ui/tooltip'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout, useCurrentToken } from '@/redux/auth/authSlice'
+import toast from 'react-hot-toast'
 
 export default function Navbar() {
   const location = useLocation()
+  const dispatch = useDispatch()
+  const token = useSelector(useCurrentToken)
+  const navigate = useNavigate()
+
   const Tabs = [
     { name: 'Home', href: '/' },
     { name: 'Products', href: '/products' },
     { name: 'About', href: '/about' },
   ]
+
+  const handleLogout = () => {
+    dispatch(logout())
+    toast.success('Logged out successfully')
+    navigate('/')
+  }
+
   return (
     //todo: fixed to top
     <nav className=''>
@@ -126,9 +140,16 @@ export default function Navbar() {
               </Tooltip>
             </TooltipProvider>
           </div>
-          <Button variant='default' size='sm' asChild>
-            <Link to={'/register'}>Sign Up</Link>
-          </Button>
+          {token ? (
+            <Button variant='destructive' size='sm' onClick={handleLogout}>
+              <LogOut className='h-4 w-4 mr-2' />
+              Logout
+            </Button>
+          ) : (
+            <Button variant='default' size='sm' asChild>
+              <Link to={'/register'}>Sign Up</Link>
+            </Button>
+          )}
           <div className='relative'>
             <GlowEffect
               colors={['#FF5733', '#33FF57', '#3357FF', '#F1C40F']}
