@@ -6,6 +6,13 @@ import MenuIcon from '../icons/MenuIcon'
 import { GlowEffect } from '../ui/glow-effect'
 import { ModeToggle } from '../icons/ModeToggle'
 import { AnimatedBackground } from '../ui/animated-background'
+import { ShoppingCart, UserRound } from 'lucide-react'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../ui/tooltip'
 
 export default function Navbar() {
   const location = useLocation()
@@ -16,7 +23,7 @@ export default function Navbar() {
   ]
   return (
     //todo: fixed to top
-    <div>
+    <nav className=''>
       <header className='flex h-20 w-full shrink-0 items-center px-4 md:px-6'>
         {/* Mobile Menu */}
         <Sheet>
@@ -40,11 +47,11 @@ export default function Navbar() {
                   data-id={tab.name}
                   type='button'
                   className={`px-2 py-0.5 transition-colors duration-300 
-    ${
-      location.pathname === tab.href
-        ? 'text-zinc-950 dark:text-zinc-50' // Active state - same as hover
-        : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-50' // Normal state with hover
-    }`}
+                    ${
+                      location.pathname === tab.href
+                        ? 'text-zinc-950 dark:text-zinc-50 font-bold border-b-2 border-b-yellow-200 dark:border-b-yellow-600' // Active state with bold and underline
+                        : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-50' // Normal state with hover
+                    }`}
                 >
                   {tab.name}
                 </Link>
@@ -78,12 +85,47 @@ export default function Navbar() {
                 key={tab.name}
                 data-id={tab.name}
                 type='button'
-                className='px-2 py-0.5 text-zinc-600 transition-colors duration-300 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50'
+                className={`px-2 py-0.5 transition-colors duration-300
+                  ${
+                    location.pathname === tab.href
+                      ? 'text-zinc-950 dark:text-zinc-50 font-bold border-b-2 border-b-yellow-200 dark:border-b-yellow-600'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-50'
+                  }`}
               >
                 {tab.name}
               </Link>
             ))}
           </AnimatedBackground>
+          <div>
+            <TooltipProvider delayDuration={0}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant='ghost' size='sm' asChild>
+                    <Link to={'/cart'}>
+                      <ShoppingCart />
+                    </Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Cart</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            <TooltipProvider delayDuration={0}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant='ghost' size='sm' asChild>
+                    <Link to={'/dashboard'}>
+                      <UserRound />
+                    </Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Cart</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
           <Button variant='default' size='sm' asChild>
             <Link to={'/register'}>Sign Up</Link>
           </Button>
@@ -101,6 +143,6 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
-    </div>
+    </nav>
   )
 }
