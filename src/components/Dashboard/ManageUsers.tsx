@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from '@/components/ui/button'
 import {
   useDeactiveAccountMutation,
@@ -19,19 +18,21 @@ export default function ManageUsers() {
     try {
       await deactivateUser(userId).unwrap()
       toast.success('User account deactivated')
-    } catch (error: string | unknown) {
+    } catch (error: unknown) {
       console.error(error)
       toast.error('Failed to deactivate user')
 
       // More detailed error message
-      if (error.status === 401) {
-        toast.error('Not authorized. Please log in again as admin.')
-        // Optional: Force re-login
-        // dispatch(logout())
-        // navigate('/login')
-      } else {
+      if (typeof error === 'object' && error !== null && 'status' in error) {
+        if (error.status === 401) {
+          toast.error('Not authorized. Please log in again as admin.')
+        }
+      }
+
+      if (typeof error === 'object' && error !== null && 'data' in error) {
+        const errorData = error.data as { message?: string }
         toast.error(
-          `Failed to deactivate user: ${error.data?.message || 'Unknown error'}`
+          `Failed to deactivate user: ${errorData?.message || 'Unknown error'}`
         )
       }
     }
@@ -67,7 +68,7 @@ export default function ManageUsers() {
                 </tr>
               </thead>
               <tbody className='divide-y divide-border'>
-                {users.map((user : TUser) => (
+                {users.map((user: TUser) => (
                   <tr key={user._id} className='hover:bg-muted/50'>
                     <td className='px-4 py-3 font-medium'>{user.name}</td>
                     <td className='px-4 py-3 text-muted-foreground'>
