@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token
 
-    if (token) headers.set('authorization', `${token}`)
+    if (token) headers.set('authorization', `Bearer ${token}`)
 
     return headers
   },
@@ -17,5 +17,5 @@ export const baseApi = createApi({
   reducerPath: 'baseApi',
   baseQuery: baseQuery,
   tagTypes: ['User', 'Product', 'Cart', 'Order'],
-  endpoints: () => ({})
+  endpoints: () => ({}),
 })

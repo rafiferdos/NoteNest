@@ -6,7 +6,6 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarProvider,
   SidebarSeparator,
 } from '@/components/ui/sidebar'
 import { ModeToggle } from '../icons/ModeToggle'

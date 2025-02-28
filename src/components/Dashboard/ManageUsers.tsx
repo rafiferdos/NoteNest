@@ -19,8 +19,21 @@ export default function ManageUsers() {
     try {
       await deactivateUser(userId).unwrap()
       toast.success('User account deactivated')
-    } catch (error) {
+    } catch (error: string | unknown) {
+      console.error(error)
       toast.error('Failed to deactivate user')
+
+      // More detailed error message
+      if (error.status === 401) {
+        toast.error('Not authorized. Please log in again as admin.')
+        // Optional: Force re-login
+        // dispatch(logout())
+        // navigate('/login')
+      } else {
+        toast.error(
+          `Failed to deactivate user: ${error.data?.message || 'Unknown error'}`
+        )
+      }
     }
   }
 

@@ -10,11 +10,10 @@ const userManagementApi = baseApi.injectEndpoints({
     }),
 
     deactiveAccount: builder.mutation({
-      query: (userInfo) => ({
+      query: (userId) => ({
         // url: '/users/:userId/deactive', //* This is previous
-        url: `/api/admin/users/${userInfo.userId}/deactive`,
+        url: `/api/admin/users/${userId}/deactive`,
         method: 'PATCH',
-        body: userInfo,
       }),
       invalidatesTags: ['User'],
     }),
