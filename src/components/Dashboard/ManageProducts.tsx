@@ -4,13 +4,14 @@ import { Plus, Edit, Trash2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { TProduct } from '../AllProducts/AllProducts'
+import { TextShimmer } from '../ui/text-shimmer'
 
 export default function ManageProducts() {
   const { data: response, isLoading, isError } = useGetAllProductDataQuery([])
   const products = response?.data || []
 
   return (
-    <div>
+    <div className='w-full max-w-full'>
       <div className='flex justify-between items-center mb-6'>
         <h1 className='text-3xl font-bold'>Manage Products</h1>
         <Button asChild>
@@ -22,15 +23,17 @@ export default function ManageProducts() {
       </div>
 
       {isLoading ? (
-        <div className='text-center py-8'>Loading products...</div>
+        <div className='text-center py-8'>
+          <TextShimmer duration={0.7}>Loading products...</TextShimmer>
+        </div>
       ) : isError ? (
         <div className='text-center py-8 text-destructive'>
           Error loading products. Please try again.
         </div>
       ) : (
-        <div className='bg-card rounded-lg shadow-sm overflow-hidden'>
-          <div className='overflow-x-auto'>
-            <table className='w-full'>
+        <div className='bg-card rounded-lg shadow-sm w-full'>
+          <div className='overflow-x-auto w-full'>
+            <table className='w-full min-w-full table-auto'>
               <thead className='bg-muted/50'>
                 <tr>
                   <th className='px-4 py-3 text-left text-sm font-medium'>
@@ -54,7 +57,7 @@ export default function ManageProducts() {
                 </tr>
               </thead>
               <tbody className='divide-y divide-border'>
-                {products.map((product : TProduct) => (
+                {products.map((product: TProduct) => (
                   <motion.tr
                     key={product._id}
                     initial={{ opacity: 0 }}
@@ -91,6 +94,9 @@ export default function ManageProducts() {
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className='p-4 bg-muted/20 border-t text-sm text-muted-foreground'>
+            Showing {products.length} products
           </div>
         </div>
       )}
